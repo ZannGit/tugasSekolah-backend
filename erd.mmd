@@ -1,0 +1,43 @@
+erDiagram
+    USER {
+        int id PK
+        string name
+        string email
+        string password
+        string role
+    }
+
+    MENU {
+        int id PK
+        string name
+        text description
+        decimal price
+        int stock
+        string category
+    }
+
+    TRANSAKSI {
+        int id PK
+        int user_id FK
+        decimal subtotal
+        decimal tax
+        decimal discount
+        decimal total
+        string payment_method
+        string status
+        datetime created_at
+    }
+
+    DETAIL_TRANSAKSI {
+        int id PK
+        int transaksi_id FK
+        int menu_id FK
+        int quantity
+        decimal unit_price
+        decimal subtotal
+    }
+
+    %% Relasi
+    USER ||--o{ TRANSAKSI : "mencatat"
+    TRANSAKSI ||--o{ DETAIL_TRANSAKSI : "memiliki"
+    MENU ||--o{ DETAIL_TRANSAKSI : "tercatat"
